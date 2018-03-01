@@ -2,7 +2,7 @@ from conans import ConanFile, CMake
 
 
 class DriverConan(ConanFile):
-    name = "Driver"
+    name = "Dependencies"
     version = "0.1"
     settings = {
         "os": ["Windows", "Linux", "Macos"], 
@@ -11,7 +11,6 @@ class DriverConan(ConanFile):
         "build_type": ["Debug", "Release"]
     }
     generators = "cmake", "visual_studio"   
-    build_requires = "Dependencies/0.1@user/testing"
     exports_sources = "*"
 
     def build(self):
@@ -20,4 +19,8 @@ class DriverConan(ConanFile):
     	cmake.build()
 
     def package(self):
-        self.copy("*.dll", dst="bin", src="bin")
+        self.copy("*.h", dst="include", src="include")
+        self.copy("*.lib", dst="lib", src="lib")
+
+    def package_info(self):
+        self.cpp_info.libs = ["dependencies"]

@@ -6,4 +6,6 @@
   #define HELLO_EXPORT
 #endif
 
-HELLO_EXPORT void hello();
+#include <string>
+
+HELLO_EXPORT void hello(const std::string &name);
