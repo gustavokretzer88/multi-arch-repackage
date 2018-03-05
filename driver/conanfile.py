@@ -20,4 +20,7 @@ class DriverConan(ConanFile):
     	cmake.build()
 
     def package(self):
-        self.copy("*.dll", dst="bin", src="bin")
+        self.copy("*.dll", src="bin", dst="bin")
+
+    def deploy(self):
+        self.copy("*.dll", src="bin", dst="deployed")

@@ -12,13 +12,6 @@ class InstallerConan(ConanFile):
     generators = "cmake", "visual_studio"
     exports_sources = "*"
 
-    def build_requirements(self):
-        self.build_requires.add("Driver/0.1@user/testing")
-
-    def imports(self):
-        self.keep_imports = True
-        self.copy("*.h")
-
     def generateInstaller(self):
         if self.settings.os == "Windows":
             self.run("%s && %s" % (tools.vcvars_command(self.settings), tools.build_sln_command(self.settings, "PACKAGE.vcxproj")))
@@ -32,6 +25,9 @@ class InstallerConan(ConanFile):
         self.generateInstaller()
 
     def package(self):
-        self.copy("myInstaller-0.1.1-*.zip") # final artifact
+        self.copy("*.zip") # final artifact
+
+    def deploy(self):
+        self.copy("*.zip") # final artifact
 
 
